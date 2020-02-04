@@ -1,0 +1,73 @@
+<div id="npmReport">
+  <div class="panel-body">
+    <span>Target: {{target.name}} : {{target.ipAddress}}</span>
+    <div class="margin-bottom-15">
+    </div>
+    <div>
+      <h3>Result Review:</h3>
+    </div>
+    <div class="example table-responsive">
+      <table class="table table-hover dataTable table-striped" data-plugin="floatThead" style="width: 100%;
+    font-size: 30px;
+    text-align: center;">
+        <thead>
+        <tr>
+          <th></th>
+          <th>Open ports </th>
+          <th>High vulnerabilities </th>
+          <th>Medium vulnerabilities</th>
+          <th>Low vulnerabilities</th>
+          <th>Log</th>
+          <th>Sessions (after exploitation)</th>
+        </tr>
+        </thead>
+        <tbody aria-relevant="all" aria-live="polite">
+        <tr class="odd">
+          <td><i class="icon wb-lock" aria-hidden="true"></i></td>
+          <td>{{overview.openPorts}}</td>
+          <td>{{overview.highVuln}}</td>
+          <td>{{overview.mediumVuln}}</td>
+          <td>{{overview.lowVuln}}</td>
+          <td>{{overview.logVuln}}</td>
+          <td>{{overview.sessions}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+
+
+
+    </div>
+    <div>
+      <h3>Open ports: </h3>
+    </div>
+    <div class="example table-responsive">
+      <table class="table table-hover dataTable table-striped" data-plugin="floatThead" style="width: 100%;
+    font-size: 30px;
+    text-align: center;">
+        <thead>
+        <tr>
+          <th></th>
+          <th>Protocole </th>
+          <th>Port </th>
+          <th>Statut</th>
+          <th>Service</th>
+        </tr>
+        </thead>
+        <tbody aria-relevant="all" aria-live="polite">
+        <tr class="odd" *ngFor="let port of reportHostNpm.host.ports">
+          <td><i class="icon wb-lock" aria-hidden="true"></i></td>
+          <td>{{port.protocol}}</td>
+          <td>{{port.portid}}</td>
+          <td>{{port.state}}</td>
+          <td>{{port.service}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+
+
+
+    </div>
+  </div>
+</div>

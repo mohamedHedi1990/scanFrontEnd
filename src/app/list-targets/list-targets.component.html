@@ -1,0 +1,41 @@
+<div class="panel-body">
+  <div class="margin-bottom-15">
+  </div>
+  <div class="example table-responsive">
+    <table class="table table-hover dataTable table-striped" data-plugin="floatThead">
+      <thead>
+      <tr>
+        <th></th>
+        <th>Target name </th>
+        <th>IP address </th>
+        <th>Scan status</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody aria-relevant="all" aria-live="polite">
+      <tr class="odd" *ngFor="let element of targetList; let index = index;">
+        <td><i class="icon wb-lock" aria-hidden="true"></i></td>
+        <td>{{element.name}}</td>
+        <td>{{element.ipAddress}}</td>
+        <td><div *ngIf="element.status==='NOT LAUNCHED'" class="badge badge-table badge-secondary"> NOT LAUNCHED </div>
+          <div *ngIf="element.status==='RUNNING'" class="badge badge-table badge-success" style="background-color: #ff4d4d !important;"> RUNNING </div>
+          <div *ngIf="element.status==='FINISHED'" class="badge badge-table badge-info" style="background-color: #d9d9d9 !important;"> FINISHED </div></td>
+        <td>
+          <i class="fas fa-play" title="Start scan"(click)="launchScan(element, index)" style="color: mediumseagreen"></i>
+          <i class="fas fa-download" title="Download last report"(click)="downloadLastReport(element)" style="padding-left: 27px;"></i>
+        </td>
+
+
+
+
+
+      </tr>
+
+      </tbody>
+    </table>
+
+
+
+
+  </div>
+</div>

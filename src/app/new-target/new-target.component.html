@@ -1,0 +1,32 @@
+<div >
+  <div *ngIf="showMessage===true" class="alert-success">
+    <i class="fas fa-check"></i> <span>Your target was successuflly saved</span>
+  </div>
+  <form class="form-detail" [formGroup]="targetForm" (ngSubmit)="onSubmit()" id="myform">
+    <div style="padding-left:15%;">
+
+      <div class="form-row">
+        <i class="fa fa-circle-o-notch" style="padding-top: 2px;padding-right: 5px;"></i>
+        <label style="padding-right: 54px;">Target name *</label>
+        <input type="text"  class="input-text" style="width: 500px; height:15%;" formControlName="name" required >
+      </div>
+      <div class="form-row" style="padding-top: 2%;">
+        <i class="fa fa-circle-o-notch" style="padding-top: 2px;padding-right: 5px;"></i>
+        <label style="padding-right: 21px;" >Target IP address *</label>
+        <input type="text"  class="input-text" style="width: 500px; height:15%;" formControlName="ipAddress" required>
+      </div>
+
+
+
+
+    </div>
+
+    <div class="form-row-last" style="padding-left:78.5%; padding-top: 1%;">
+      <!--<input type="submit" name="register" class="register" value="Envoyer" [disabled]="allInformationProvided==false" [ngClass]="{isDisabled: 'allInformationProvided==false'}">-->
+      <button type="submit" name="register" class="register" value="Envoyer"><i class="fas fa-save" style="padding-right: 5px;"></i> Envoyer</button>
+    </div>
+
+
+  </form>
+
+</div>
