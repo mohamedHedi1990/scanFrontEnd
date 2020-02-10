@@ -17,21 +17,7 @@ export class HorizontalMenuComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-
-    if (this.currentUser.isAdmin === true) {
-      this.completeName = 'Administrateur';
-    } else {
-      this.completeName = this.currentUser.firstName + ' ' + this.currentUser.lastName;
-    }
-
-    if (this.currentUser.illustrationUrl == null) {
-      this.illustrationUrl = 'http://localhost:8090/file/downloadFile/user.jpeg';
-    } else {
-      this.illustrationUrl = this.currentUser.illustrationUrl;
-    }
-
-
-  }
+}
   deconnecter() {
     const context = this;
     const url  = 'http://localhost:8090/user/deconnect/' + this.currentUser.id;

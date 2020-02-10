@@ -102,7 +102,7 @@ export class ListTargetsComponent implements OnInit {
   }
 
 downloadLastReport(element ) {
-  this._router.navigate(['nmapReport', 1, element.ipAddress, element.name]);
+  this._router.navigate(['lastReport', 1]);
 }
 
 }

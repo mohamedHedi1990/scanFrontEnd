@@ -19,6 +19,8 @@ import { jqxChartModule } from 'jqwidgets-ng/jqxchart';
 import { Chart2Component } from './chart2/chart2.component';
 import { ChartsModule } from 'ng2-charts';
 import { NpmReportComponent } from './npm-report/npm-report.component';
+import { TargetReportComponent } from './target-report/target-report.component';
+import { InterfaceTargetReportComponent } from './interface-target-report/interface-target-report.component';
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'menu', component: MenuComponent },
@@ -26,7 +28,8 @@ const appRoutes: Routes = [
   { path: 'acceuil', component: AcceuilComponent },
   { path: 'new_target', component: InterfaceNewTargetComponent },
   { path: 'target_list', component: InterfaceListTargetsComponent },
-  { path: 'nmapReport/:id/:ipAddress/:name', component: NpmReportComponent }
+  { path: 'nmapReport/:id/:ipAddress/:name', component: NpmReportComponent },
+  { path: 'lastReport/:id', component: InterfaceTargetReportComponent }
 ];
 
 @NgModule({
@@ -42,7 +45,9 @@ const appRoutes: Routes = [
     AcceuilComponent,
     Chart1Component,
     Chart2Component,
-    NpmReportComponent
+    NpmReportComponent,
+    TargetReportComponent,
+    InterfaceTargetReportComponent
   ],
   imports: [
     BrowserModule,
