@@ -29,7 +29,7 @@ const appRoutes: Routes = [
   { path: 'new_target', component: InterfaceNewTargetComponent },
   { path: 'target_list', component: InterfaceListTargetsComponent },
   { path: 'nmapReport/:id/:ipAddress/:name', component: NpmReportComponent },
-  { path: 'lastReport/:id', component: InterfaceTargetReportComponent }
+  { path: 'lastReport/:targetName', component: InterfaceTargetReportComponent }
 ];
 
 @NgModule({

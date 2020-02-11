@@ -18,19 +18,19 @@ export class ListTargetsComponent implements OnInit {
     {
       name : 'Laptop',
       ipAddress : '192.168.1.41',
-      status : 'NOT LAUNCHED',
+      scan_status : 'NOT LAUNCHED',
 
     },
     {
       name : 'Laptop1',
       ipAddress : '192.168.1.42',
-      status : 'RUNNING',
+      scan_status : 'RUNNING',
 
     },
     {
       name : 'Laptop3',
       ipAddress : '192.168.1.43',
-      status : 'FINISHED',
+      scan_status : 'FINISHED',
 
     }
   ];
@@ -43,16 +43,14 @@ export class ListTargetsComponent implements OnInit {
   }
 
   launchScan(target, index) {
-    this.targetList[index].status = 'RUNNING';
+    this.targetList[index].scan_status = 'RUNNING';
     const context = this;
     const url  = 'http://localhost:8090/api/target/' + target.name ;
     this.axios.put(url)
       .then(function(response) {
         // handle success
-        this.targetList[index].status = 'FINISHED';
+        this.targetList[index].scan_status = response;
         console.log('scan finished');
-        // location.href = 'http://localhost:4200/listeMateriels/';
-        // context.router.navigate(['listeDedeplacementsNaturels']);
       })
       .catch(function(error) {
         // handle error
@@ -64,7 +62,7 @@ export class ListTargetsComponent implements OnInit {
   }
 
   getAllList() {
-    this.targetList = [
+    /*this.targetList = [
       {
         name : 'Laptop',
         ipAddress : '192.168.1.41',
@@ -83,13 +81,14 @@ export class ListTargetsComponent implements OnInit {
         status : 'FINISHED',
 
       }
-    ];
-    /*const context = this;
+    ];*/
+    const context = this;
     const url  = 'http://localhost:8090/api/target/';
     this.axios.get(url)
       .then(function(response) {
         // handle success
-        context.targetList= response.date;
+        context.targetList= response;
+        console.log('target list was successufully charged');
 
       })
       .catch(function(error) {
@@ -98,11 +97,11 @@ export class ListTargetsComponent implements OnInit {
       })
       .finally(function() {
         // always executed
-      });*/
+      });
   }
 
 downloadLastReport(element ) {
-  this._router.navigate(['lastReport', 1]);
+  this._router.navigate(['lastReport', element.name]);
 }
 
 }

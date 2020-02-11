@@ -8,7 +8,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./target-report.component.css']
 })
 export class TargetReportComponent implements OnInit {
-  targetId: string = null;
+  targetName: string = null;
   axios = require('axios');
   targetReportDto :any = {
     target : {
@@ -63,20 +63,18 @@ export class TargetReportComponent implements OnInit {
   constructor(private activatedroute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.targetId = this.activatedroute.snapshot.paramMap.get('id');
+    this.targetName = this.activatedroute.snapshot.paramMap.get('targetName');
     console.log('ngOnInit');
   }
 
   getReport() {
     const context = this;
-    const url  = 'http://localhost:8090/api/target/report' + this.targetId ;
+    const url  = 'http://localhost:8090/api/target/report' + this.targetName ;
     this.axios.get(url)
         .then(function(response) {
           // handle success
           context.targetReportDto = response;
-          console.log('scan finished');
-          // location.href = 'http://localhost:4200/listeMateriels/';
-          // context.router.navigate(['listeDedeplacementsNaturels']);
+          console.log('last report was retrieved');
         })
         .catch(function(error) {
           // handle error
