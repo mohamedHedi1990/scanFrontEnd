@@ -58,6 +58,58 @@ export class TargetReportComponent implements OnInit {
         refernces_others: '',
         threat: '',
       }
+    ],
+    midiumResults: [
+      {
+        port: 'port',
+        severity: '',
+        name: '',
+        product: '',
+        detection_source_name: '',
+        detection_oid: '',
+        summary: '',
+        installed_version: '',
+        fixed_version: '',
+        impact: '',
+        solutionType: '',
+        solution: '',
+        affectedSoftware: '',
+        vulnerbailityInsight: '',
+        details: '',
+        oid: '',
+        scan_nvt_version: '',
+        method: '',
+        cve: '',
+        bid: '',
+        refernces_others: '',
+        threat: '',
+      }
+    ],
+    lowResults: [
+      {
+        port: 'port',
+        severity: '',
+        name: '',
+        product: '',
+        detection_source_name: '',
+        detection_oid: '',
+        summary: '',
+        installed_version: '',
+        fixed_version: '',
+        impact: '',
+        solutionType: '',
+        solution: '',
+        affectedSoftware: '',
+        vulnerbailityInsight: '',
+        details: '',
+        oid: '',
+        scan_nvt_version: '',
+        method: '',
+        cve: '',
+        bid: '',
+        refernces_others: '',
+        threat: '',
+      }
     ]
   };
   constructor(private activatedroute: ActivatedRoute, private router: Router) { }
@@ -65,11 +117,13 @@ export class TargetReportComponent implements OnInit {
   ngOnInit() {
     this.targetName = this.activatedroute.snapshot.paramMap.get('targetName');
     console.log('ngOnInit');
+    this.getReport();
   }
 
   getReport() {
     const context = this;
-    const url  = 'http://localhost:8090/api/target/report' + this.targetName ;
+    console.log('Last report for target ', this.targetName);
+    const url  = 'http://localhost:8090/api/target/report/' + this.targetName ;
     this.axios.get(url)
         .then(function(response) {
           // handle success

@@ -1,0 +1,36 @@
+<div class="panel-body">
+    <div class="margin-bottom-15">
+    </div>
+    <div class="example table-responsive">
+        <table class="table table-hover dataTable table-striped" data-plugin="floatThead">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Report name </th>
+                <th>Creation date </th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody aria-relevant="all" aria-live="polite">
+            <tr class="odd" *ngFor="let element of reports; let index = index;">
+                <td><i class="icon wb-lock" aria-hidden="true"></i></td>
+                <td>{{element.name}}</td>
+                <td>{{element.creationDate}}</td>
+                <td>
+                    <i class="fas fa-download" title="Download"(click)="download(element)" style="padding-left: 27px;"></i>
+                </td>
+
+
+
+
+
+            </tr>
+
+            </tbody>
+        </table>
+
+
+
+
+    </div>
+</div>

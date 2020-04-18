@@ -18,7 +18,7 @@ export class ListTargetsComponent implements OnInit {
     {
       name : 'Laptop',
       ipAddress : '192.168.1.41',
-      scan_status : 'NOT LAUNCHED',
+      scan_status : 'NOT_STARED',
 
     },
     {
@@ -87,7 +87,8 @@ export class ListTargetsComponent implements OnInit {
     this.axios.get(url)
       .then(function(response) {
         // handle success
-        context.targetList= response;
+        console.log('response ', response);
+        context.targetList = response.data;
         console.log('target list was successufully charged');
 
       })
@@ -102,6 +103,10 @@ export class ListTargetsComponent implements OnInit {
 
 downloadLastReport(element ) {
   this._router.navigate(['lastReport', element.name]);
+}
+
+viewAllReports(element) {
+  this._router.navigate(['allReports', element.name]);
 }
 
 }

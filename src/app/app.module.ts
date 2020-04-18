@@ -21,6 +21,8 @@ import { ChartsModule } from 'ng2-charts';
 import { NpmReportComponent } from './npm-report/npm-report.component';
 import { TargetReportComponent } from './target-report/target-report.component';
 import { InterfaceTargetReportComponent } from './interface-target-report/interface-target-report.component';
+import { ListReportsComponent } from './list-reports/list-reports.component';
+import { InterfaceListReportsComponent } from './interface-list-reports/interface-list-reports.component';
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'menu', component: MenuComponent },
@@ -29,7 +31,8 @@ const appRoutes: Routes = [
   { path: 'new_target', component: InterfaceNewTargetComponent },
   { path: 'target_list', component: InterfaceListTargetsComponent },
   { path: 'nmapReport/:id/:ipAddress/:name', component: NpmReportComponent },
-  { path: 'lastReport/:targetName', component: InterfaceTargetReportComponent }
+  { path: 'lastReport/:targetName', component: InterfaceTargetReportComponent },
+  { path: 'allReports/:targetName', component: InterfaceListReportsComponent }
 ];
 
 @NgModule({
@@ -47,7 +50,9 @@ const appRoutes: Routes = [
     Chart2Component,
     NpmReportComponent,
     TargetReportComponent,
-    InterfaceTargetReportComponent
+    InterfaceTargetReportComponent,
+    ListReportsComponent,
+    InterfaceListReportsComponent
   ],
   imports: [
     BrowserModule,

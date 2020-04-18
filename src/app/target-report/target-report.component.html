@@ -89,7 +89,7 @@
         <span>1.4. Vulnerabilities list</span>
     </div>
     <div style="font-weight: bold; padding-bottom: 15px;">
-        <span style="    background: red;color: white;">1.4.1 High ulnerabilities</span>
+        <span style="    background: red;color: white;">1.4.1 High vulnerabilities</span>
     </div>
     <div *ngFor="let element of targetReportDto.highResults" style="border:solid #8080801c;" class="center">
         <div style="background-color:#eeeeee">
@@ -160,8 +160,150 @@
         <br>
         <span>Others: {{element.refernces_others}}</span>
     </div>
+    <div style="font-weight: bold; padding-bottom: 15px;">
+        <span style="    background: orange;color: white;">1.4.1 Medium vulnerabilities</span>
+    </div>
+    <div *ngFor="let element of targetReportDto.midiumResults" style="border:solid #8080801c;" class="center">
+        <div style="background-color:#eeeeee">
+            <span style="font-weight: bold;">Port: {{element.port}}</span>
+            <br>
+            <span style="font-weight: bold;">{{element.threat}}</span>
+            <span style="font-weight: bold;">(CVSS: {{element.severity}})</span>
+            <br>
+            <span style="font-weight: bold;">NVT: {{element.name}}</span>
+        </div>
 
+        <hr>
+        <span style="font-weight: bold">Product detection result</span>
+        <br>
+        <span>{{element.product}}</span>
+        <br>
+        <span>Detected by {{element.detection_source_name}} (OID: {{element.detection_oid}})</span>
+        <hr>
+        <span style="font-weight: bold">Summary</span>
+        <br>
+        <span>{{element.summary}}</span>
+        <hr>
+        <span style="font-weight: bold">Vulnerability detection result</span>
+        <br>
+        <span>Installed version: {{element.installed_version}}</span>
+        <br>
+        <span>Fixed version: {{element.fixed_version}}</span>
+        <hr>
+        <span style="font-weight: bold">Impact</span>
+        <br>
+        <span>{{element.impact}}</span>
+        <hr>
+        <span style="font-weight: bold">Solution</span>
+        <br>
+        <span>Solution type: {{element.solutionType}}</span>
+        <br>
+        <span>{{element.solution}}</span>
+        <hr>
+        <span style="font-weight: bold">Affected software\OS</span>
+        <br>
+        <span>{{element.affectedSoftware}}</span>
+        <hr>
+        <span style="font-weight: bold">Vulnerability insight</span>
+        <br>
+        <span>{{element.vulnerbailityInsight}}</span>
+        <hr>
+        <span style="font-weight: bold">Vulnerability detection method</span>
+        <br>
+        <span>Details: {{element.details}}</span>
+        <br>
+        <span>OID: {{element.oid}}</span>
+        <br>
+        <span>Version used: {{element.scan_nvt_version}}</span>
+        <hr>
+        <span style="font-weight: bold">Product detection result</span>
+        <br>
+        <span>Product: {{element.product}}</span>
+        <br>
+        <span>method: {{element.method}}</span>
+        <br>
+        <span>OID: {{element.detection_oid}}</span>
+        <hr>
+        <span style="font-weight: bold">References</span>
+        <br>
+        <span>CVE: {{element.cve}}</span>
+        <br>
+        <span>BID: {{element.bid}}</span>
+        <br>
+        <span>Others: {{element.refernces_others}}</span>
+    </div>
+    <div style="font-weight: bold; padding-bottom: 15px;">
+        <span style="    background: yellow;color: white;">1.4.1 Low vulnerabilities</span>
+    </div>
+    <div *ngFor="let element of targetReportDto.lowResults" style="border:solid #8080801c;" class="center">
+        <div style="background-color:#eeeeee">
+            <span style="font-weight: bold;">Port: {{element.port}}</span>
+            <br>
+            <span style="font-weight: bold;">{{element.threat}}</span>
+            <span style="font-weight: bold;">(CVSS: {{element.severity}})</span>
+            <br>
+            <span style="font-weight: bold;">NVT: {{element.name}}</span>
+        </div>
 
+        <hr>
+        <span style="font-weight: bold">Product detection result</span>
+        <br>
+        <span>{{element.product}}</span>
+        <br>
+        <span>Detected by {{element.detection_source_name}} (OID: {{element.detection_oid}})</span>
+        <hr>
+        <span style="font-weight: bold">Summary</span>
+        <br>
+        <span>{{element.summary}}</span>
+        <hr>
+        <span style="font-weight: bold">Vulnerability detection result</span>
+        <br>
+        <span>Installed version: {{element.installed_version}}</span>
+        <br>
+        <span>Fixed version: {{element.fixed_version}}</span>
+        <hr>
+        <span style="font-weight: bold">Impact</span>
+        <br>
+        <span>{{element.impact}}</span>
+        <hr>
+        <span style="font-weight: bold">Solution</span>
+        <br>
+        <span>Solution type: {{element.solutionType}}</span>
+        <br>
+        <span>{{element.solution}}</span>
+        <hr>
+        <span style="font-weight: bold">Affected software\OS</span>
+        <br>
+        <span>{{element.affectedSoftware}}</span>
+        <hr>
+        <span style="font-weight: bold">Vulnerability insight</span>
+        <br>
+        <span>{{element.vulnerbailityInsight}}</span>
+        <hr>
+        <span style="font-weight: bold">Vulnerability detection method</span>
+        <br>
+        <span>Details: {{element.details}}</span>
+        <br>
+        <span>OID: {{element.oid}}</span>
+        <br>
+        <span>Version used: {{element.scan_nvt_version}}</span>
+        <hr>
+        <span style="font-weight: bold">Product detection result</span>
+        <br>
+        <span>Product: {{element.product}}</span>
+        <br>
+        <span>method: {{element.method}}</span>
+        <br>
+        <span>OID: {{element.detection_oid}}</span>
+        <hr>
+        <span style="font-weight: bold">References</span>
+        <br>
+        <span>CVE: {{element.cve}}</span>
+        <br>
+        <span>BID: {{element.bid}}</span>
+        <br>
+        <span>Others: {{element.refernces_others}}</span>
+    </div>
 
 
 </div>

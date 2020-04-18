@@ -4,7 +4,7 @@
     </div>
     <div style=" width:100%; padding-left: 20%">
         <app-horizontal-menu></app-horizontal-menu>
-        <div class="panel" style="margin: 3%;">
+        <div class="panel" style="margin: 3%;border:solid; border-color: #00004d;border-radius: 16px;">
             <header class="panel-heading">
                 <div class="row">
                     <div class="col-lg-4"></div>
@@ -15,13 +15,12 @@
                     </div>
                     <div class="col-lg-4"></div>
                 </div>
-                <!--<h3 class="panel-title" style="padding-top:4%;padding-left: 4%;padding-bottom: 4% "> <i class="fa fa-list" style="padding-top: 2px;padding-right: 5px;"></i>Target list: </h3> -->
+                <h3 class="panel-title" style="padding-top:4%;padding-left: 4%;padding-bottom: 4% "> <i class="fa fa-list" style="padding-top: 2px;padding-right: 5px;"></i>Report list: </h3>
             </header>
             <div class="panel-body">
                 <div class="margin-bottom-15">
                 </div>
-                <button style="float: right; font-weight: bold;">Download report</button>
-                <app-target-report></app-target-report>
+                <app-list-reports [targetName]="targetName"></app-list-reports>
             </div>
         </div>
     </div>
