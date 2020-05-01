@@ -127,8 +127,8 @@ export class TargetReportComponent implements OnInit {
     this.axios.get(url)
         .then(function(response) {
           // handle success
-          context.targetReportDto = response;
-          console.log('last report was retrieved');
+          context.targetReportDto = response.data;
+          console.log('last report was retrieved ', response.data);
         })
         .catch(function(error) {
           // handle error
