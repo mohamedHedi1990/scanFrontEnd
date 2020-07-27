@@ -1,5 +1,5 @@
 declare var require: any;
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -8,13 +8,26 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./target-report.component.css']
 })
 export class TargetReportComponent implements OnInit {
-  targetName: string = null;
+  @Input() targetName: string = null;
+  @Input() reportId: any = null;
   axios = require('axios');
-  targetReportDto :any = {
-    target : {
+  targetReportDto: any = {
+    target: {
       name: 'target name',
       status: 'Connected',
+      ipAddress: '',
     },
+    sessions: [{
+      name: '',
+      type: '',
+      info: '',
+      tunnel: '',
+      via: '',
+      encrypted: '',
+      checkIn: '',
+      uuid: '',
+      registered: '',
+    }],
     openPorts: 0,
     highVulNum: 0,
     midiumVulNum: 0,
@@ -57,6 +70,9 @@ export class TargetReportComponent implements OnInit {
         bid: '',
         refernces_others: '',
         threat: '',
+        description: '',
+        vulnerbailityDetectionMethod: '',
+        cvss_base: '',
       }
     ],
     midiumResults: [
@@ -83,6 +99,9 @@ export class TargetReportComponent implements OnInit {
         bid: '',
         refernces_others: '',
         threat: '',
+        description: '',
+        vulnerbailityDetectionMethod: '',
+        cvss_base: '',
       }
     ],
     lowResults: [
@@ -109,26 +128,37 @@ export class TargetReportComponent implements OnInit {
         bid: '',
         refernces_others: '',
         threat: '',
+        description: '',
+        vulnerbailityDetectionMethod: '',
+        cvss_base: '',
       }
-    ]
+    ],
   };
-  constructor(private activatedroute: ActivatedRoute, private router: Router) { }
+
+  constructor(private activatedroute: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit() {
-    this.targetName = this.activatedroute.snapshot.paramMap.get('targetName');
+    // this.targetName = this.activatedroute.snapshot.paramMap.get('targetName');
     console.log('ngOnInit');
-    this.getReport();
+    if (this.reportId != null) {
+      this.getReportById();
+    } else {
+      this.getReport();
+    }
+
   }
 
   getReport() {
+    console.log('target name ', this.targetName);
     const context = this;
     console.log('Last report for target ', this.targetName);
-    const url  = 'http://localhost:8090/api/target/report/' + this.targetName ;
+    const url = 'http://localhost:8090/api/target/report/' + this.targetName;
     this.axios.get(url)
         .then(function(response) {
           // handle success
           context.targetReportDto = response.data;
-          console.log('last report was retrieved ', response.data);
+          console.log('last report was retrieved');
         })
         .catch(function(error) {
           // handle error
@@ -140,4 +170,23 @@ export class TargetReportComponent implements OnInit {
 
   }
 
+  getReportById() {
+    const context = this;
+    console.log('Last report by id  ', this.reportId);
+    const url = 'http://localhost:8090/api/target/reportId/' + this.reportId;
+    this.axios.get(url)
+        .then(function(response) {
+          // handle success
+          context.targetReportDto = response.data;
+          console.log('last report was retrieved');
+        })
+        .catch(function(error) {
+          // handle error
+          console.log('error');
+        })
+        .finally(function() {
+          // always executed
+        });
+
+  }
 }

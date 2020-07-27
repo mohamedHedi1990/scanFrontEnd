@@ -27,6 +27,7 @@
     "canvasjs": "^1.8.3",
     "chart.js": "^2.9.3",
     "font-awesome": "^4.7.0",
+    "jquery": "^3.5.1",
     "jqwidgets-framework": "^9.0.0",
     "jqwidgets-ng": "^9.0.0",
     "jspdf": "^1.5.3",

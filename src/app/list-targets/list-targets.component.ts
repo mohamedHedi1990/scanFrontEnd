@@ -2,6 +2,7 @@ import {Router} from '@angular/router';
 
 declare var require: any;
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -13,7 +14,15 @@ export class ListTargetsComponent implements OnInit {
   axios = require('axios');
   // targetList: any[] = [];
 
-
+  selectedTarget = this;
+  showMessage = false;
+  showMessagedelete = false;
+  targetForm = new FormGroup({
+    name: new FormControl(''),
+    id: new FormControl(null),
+    ipAddress: new FormControl(''),
+  });
+  showEdit = false;
   targetList = [
     {
       name : 'Laptop',
@@ -108,5 +117,86 @@ downloadLastReport(element ) {
 viewAllReports(element) {
   this._router.navigate(['allReports', element.name]);
 }
+
+  editTarget(element) {
+    this.targetForm.controls.name.setValue( element.name);
+    this.targetForm.controls.ipAddress.setValue( element.ipAddress);
+    this.targetForm.controls.id.setValue( element.id);
+    this.showEdit = true;
+
+  }
+
+  deleteTarget(element) {
+    const context = this;
+    const url  = 'http://localhost:8090/api/target/' + element.id;
+    this.axios.delete(url)
+        .then(function(response) {
+          console.log('target was successufully deleted');
+          context.getAllList();
+          context.showMessagedelete = true;
+          setTimeout(function() {
+            context.showMessagedelete = false;
+            // location.href = 'http://localhost:4200/listeMateriels';
+          }, 3000);
+        })
+        .catch(function(error) {
+          // handle error
+          console.log('error');
+        })
+        .finally(function() {
+          // always executed
+        });
+  }
+
+  initTargerForm() {
+    this.targetForm.controls.name.setValue( '');
+    this.targetForm.controls.ipAddress.setValue( '');
+    this.targetForm.controls.id.setValue( null);
+  }
+
+  launchGlobalScan() {
+    this.targetList.forEach(target => {
+      target.scan_status = 'RUNNING';
+    });
+    const context = this;
+    const url  = 'http://localhost:8090/api/target/global-report';
+    this.axios.post(url)
+        .then(function(response) {
+          // handle success
+          context.targetList.forEach(target => {
+            target.scan_status = 'FINISHED';
+          });
+          console.log('scan finished');
+        })
+        .catch(function(error) {
+          // handle error
+          console.log('error');
+        })
+        .finally(function() {
+          // always executed
+        });
+  }
+
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    const context = this;
+    console.log('target form:  ', this.targetForm.value);
+    const url  = 'http://localhost:8090/api/target/';
+    this. axios.post(url, this.targetForm.value)
+        .then(function(response) {
+          console.log('success target modification with response ', response);
+          context.showMessage = true;
+          setTimeout(function() {
+            context.showMessage = false;
+            context.showEdit = false;
+            context.initTargerForm();
+            // location.href = 'http://localhost:4200/listeMateriels';
+          }, 3000);
+
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+  }
 
 }

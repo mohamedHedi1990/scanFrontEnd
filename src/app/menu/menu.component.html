@@ -7,22 +7,20 @@
 </head>
 <body>
 <div class="nav" >
-  <div class="menu_dropdown" style="background-image: url('../../assets/images/auraxB.jpeg');">
-    <img class="brand-img" src="../../assets/images/auraxB.jpeg" alt="aurax" style="width: 100%;">
-    <i class="fas fa-caret-down"></i>
+  <div class="menu_dropdown" style="background-color: #05182b !important;">
   </div>
   <div class="list" style="background-color: #05182b !important;">
     <div>
       <ul class="list-group list-group-flush" style="background-color: #05182b !important;">
         <li class="list-group-item list-group-item-dark" style="border: 0px solid rgba(0, 0, 0, 0.125) !important; background-color: #05182b">
           <i class="fas fa-home"></i>
-          <a [routerLink]="['/','acceuil']" class="links" title="Home">Home</a>
+          <a [routerLink]="['/','acceuil']" class="links" title="Home">Overview</a>
         </li>
 
 
         <li class="list-group-item list-group-item-dark" style="border: 0px solid rgba(0, 0, 0, 0.125) !important; background-color: #05182b">
           <i class="fas fa-laptop"></i>
-          <a  class="links"  title="Targets">Targets</a>
+          <a  class="links"  title="Targets">Target Management</a>
         </li>
         <li class="nav-item px-3" style="background-color: #05182b !important;margin-left: 30px;">
           <i class="fas fa-plus"></i>
@@ -37,7 +35,12 @@
 
         <li class="list-group-item list-group-item-dark" style="border: 0px solid rgba(0, 0, 0, 0.125) !important; background-color: #05182b">
           <i class="fas fa-list"></i>
-          <a [routerLink]="['/','acceuil']" class="links" title="Reports">Reports</a>
+          <a [routerLink]="['/','configure-global-reports']" class="links" title="Configure global scan">Configure global scan</a>
+
+        </li>
+        <li class="list-group-item list-group-item-dark" style="border: 0px solid rgba(0, 0, 0, 0.125) !important; background-color: #05182b">
+          <i class="fas fa-list"></i>
+          <a [routerLink]="['/','global-reports']" class="links" title="Global reports">Global reports</a>
 
         </li>
 

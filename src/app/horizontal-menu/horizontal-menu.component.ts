@@ -18,7 +18,7 @@ export class HorizontalMenuComponent implements OnInit {
 
   ngOnInit() {
 }
-  deconnecter() {
+  /*deconnecter() {
     const context = this;
     const url  = 'http://localhost:8090/user/deconnect/' + this.currentUser.id;
     this.axios.put(url, {
@@ -41,6 +41,9 @@ export class HorizontalMenuComponent implements OnInit {
       });
 
 
+  }*/
+  deconnecter() {
+    location.href = 'http://localhost:4200/';
   }
 
 

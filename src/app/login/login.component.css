@@ -24,9 +24,8 @@
 }
 .content {
   display: flex;
-  background: url('../../assets/images/auraxB.jpeg');
+  background-color: #05182b;
   height: 655px;
-  background-color: grey;
   background-repeat:no-repeat;
   background-size: cover;
 }

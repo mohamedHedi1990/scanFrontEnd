@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+declare var require: any;
 @Component({
   selector: 'app-chart1',
   templateUrl: './chart1.component.html',
@@ -7,25 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Chart1Component implements OnInit {
   sampleData: any[] = [
-    { Day: 'January', Low: 30, Medium: 0, High: 25 },
-    { Day: 'February', Low: 25, Medium: 25, High: 0 },
-    { Day: 'March', Low: 30, Medium: 0, High: 25 },
-    { Day: 'April', Low: 35, Medium: 25, High: 45 },
-    { Day: 'May', Low: 0, Medium: 20, High: 25 },
-    { Day: 'June', Low: 30, Medium: 0, High: 30 },
-    { Day: 'July', Low: 60, Medium: 45, High: 0 },
-    { Day: 'August', Low: 0, Medium: 20, High: 25 },
-    { Day: 'September', Low: 30, Medium: 0, High: 30 },
-    { Day: 'October', Low: 60, Medium: 45, High: 0 },
-    { Day: 'November', Low: 0, Medium: 20, High: 25 },
-    { Day: 'December', Low: 30, Medium: 0, High: 30 }
+
   ];
   padding: any = { left: 5, top: 5, right: 5, bottom: 5 };
   titlePadding: any = { left: 90, top: 0, right: 0, bottom: 10 };
   xAxis: any =
     {
-      dataField: 'Day',
-      unitInterval: 1,
+      dataField: 'creationDate',
+      // unitInterval: 1,
       axisSize: 'auto',
       tickMarks: {
         visible: true,
@@ -36,7 +25,8 @@ export class Chart1Component implements OnInit {
         visible: true,
         interval: 1,
         color: '#BCBCBC'
-      }
+      },
+
     };
   valueAxis: any =
     {
@@ -54,17 +44,37 @@ export class Chart1Component implements OnInit {
         columnsGapPercent: 50,
         seriesGapPercent: 0,
         series: [
-          { dataField: 'Low', displayText: 'Low', color: '#7FFF00' },
-          { dataField: 'Medium', displayText: 'Medium', color: '#FFA500',  },
-          { dataField: 'High', displayText: 'High', color: '#FF0000' }
+          { dataField: 'lowVulNumber', displayText: 'Low', color: '#7FFF00' },
+          { dataField: 'mediuimVulNumber', displayText: 'Medium', color: '#FFA500' },
+          { dataField: 'heightVulNumber', displayText: 'High', color: '#FF0000' }
         ]
       }
     ];
+    axios = require('axios');
   constructor() { }
 
   ngOnInit() {
+        this.getLast12GlobalreportStat();
   }
+    getLast12GlobalreportStat() {
+        const context = this;
+        const url = 'http://localhost:8090/api/target/last-global-report-stat-12/';
+        this.axios.get(url)
+            .then(function(response) {
+                // handle success
+                context.sampleData = response.data;
+                console.log(' context.sampleData ',  context.sampleData);
 
+            })
+            .catch(function(error) {
+                // handle error
+                console.log('error');
+            })
+            .finally(function() {
+                // always executed
+            });
+
+    }
   getWidth(): any {
     if (document.body.offsetWidth < 850) {
       return '90%';

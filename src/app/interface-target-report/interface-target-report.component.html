@@ -20,8 +20,8 @@
             <div class="panel-body">
                 <div class="margin-bottom-15">
                 </div>
-                <button style="float: right; font-weight: bold;">Download report</button>
-                <app-target-report></app-target-report>
+                <button style="float: right; font-weight: bold;" (click)="getPDF()">Download report</button>
+                <app-target-report [targetName]="targetName"  [reportId]="reportId" id="reportId"></app-target-report>
             </div>
         </div>
     </div>

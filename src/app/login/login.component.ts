@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   API_USER = 'http://localhost:8090/user/';
 
   isAuth = false;
+  wrongLogin = false;
   username = '';
   password = '';
   axios = require('axios');
@@ -21,38 +22,35 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    location.href = 'http://localhost:4200/acceuil';
 
 
-   /* const context = this;
+
+    const context = this;
 
 
-    const url  = this.API_USER + 'isFound' ;
-    this. axios.post(url, { login: this.username, password: this.password}, {
+    const url  = 'http://localhost:8090/api/user/' + this.username + '/' + this.password ;
+    this. axios.get(url, {
       headers: {
         'Content-Type': 'application/json',
       }
     })
       .then(function(response) {
-        console.log('userrrrr', response.data);
-        if (response.data.id != null) {
+        if (response.data != null && response.data.id != null) {
           localStorage.setItem('currentUser', JSON.stringify(response.data));
           // context.router.navigate(['/ecranAcceuil']);
-          if (response.data.isAdmin === true) {
-            // location.href = 'http://localhost:4200/adminConge/';
-            location.href = 'http://localhost:4200/acceuil';
-          } else {
-            location.href = 'http://localhost:4200/acceuil';
-          }
+          location.href = 'http://localhost:4200/acceuil';
 
+        } else {
+          context.wrongLogin = true;
         }
 
       })
       .catch(function(error) {
         console.log(error);
+        context.wrongLogin = true;
       })
       .finally(function() {
         // always executed
-      });*/
+      });
   }
 }

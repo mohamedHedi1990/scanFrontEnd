@@ -1,0 +1,529 @@
+<div>
+    <div style="font-weight: bold;
+    font-size: 20px;
+    color: blue;
+    padding-bottom: 15px;">
+        <span>{{number}}. {{ targetReportDto.target.name }}</span>
+    </div>
+    <div class="title">
+        <span>{{number}}.1. Target status</span>
+    </div>
+    <div class="example table-responsive center">
+        <table class="table table-hover dataTable table-striped" data-plugin="floatThead">
+            <thead>
+            <tr >
+                <th></th>
+                <th>Target</th>
+                <th>IP Address</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody aria-relevant="all" aria-live="polite">
+            <tr class="odd">
+                <td><i class="icon wb-lock" aria-hidden="true"></i></td>
+                <td>{{ targetReportDto.target.name }}</td>
+                <td>{{ targetReportDto.target.ipAddress}}</td>
+                <td>{{ targetReportDto.target.status}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="title">
+        <span>{{number}}.2. Result review</span>
+    </div>
+
+    <div class="example table-responsive center">
+        <table class="table table-hover dataTable table-striped" data-plugin="floatThead" style="text-align: center;">
+            <thead>
+            <tr >
+                <th></th>
+                <th>Open ports</th>
+                <th>High vulnerabilities</th>
+                <th>Medium vulnerabilities</th>
+                <th>Low vulnerabilities</th>
+                <th>Sessions (after exploitation)</th>
+            </tr>
+            </thead>
+            <tbody aria-relevant="all" aria-live="polite">
+            <tr class="odd">
+                <td><i class="icon wb-lock" aria-hidden="true"></i></td>
+                <td>{{ targetReportDto.openPorts }}</td>
+                <td>{{ targetReportDto.highVulNum}}</td>
+                <td>{{ targetReportDto.midiumVulNum}}</td>
+                <td>{{ targetReportDto.lowVulNum}}</td>
+                <td>{{ targetReportDto.sessions.length}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="title">
+        <span>{{number}}.3. Open ports</span>
+    </div>
+
+    <div class="example table-responsive center">
+        <table class="table table-hover dataTable table-striped" data-plugin="floatThead">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Port </th>
+                <th>Protocole </th>
+                <th>Service</th>
+            </tr>
+            </thead>
+            <tbody aria-relevant="all" aria-live="polite">
+            <tr class="odd" *ngFor="let port of targetReportDto.ports">
+                <td><i class="icon wb-lock" aria-hidden="true"></i></td>
+                <td>{{port.portid}}</td>
+                <td>{{port.protocol}}</td>
+                <td>{{port.service}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="title">
+        <span>{{number}}.4. Vulnerabilities list</span>
+    </div>
+    <div style="font-weight: bold; padding-bottom: 15px;">
+        <span style="    background: red;color: white;">1.4.1 High vulnerabilities</span>
+    </div>
+    <div *ngFor="let element of targetReportDto.highResults" style="border:solid #8080801c;" class="center">
+        <div style="background-color:#eeeeee">
+            <span *ngIf="element.port!=null && element.port!==''" style="font-weight: bold;">Port: {{element.port}}</span>
+            <br>
+            <span *ngIf="element.threat!=null && element.threat !==''" style="font-weight: bold;">{{element.threat}}</span>
+            <span *ngIf="element.cvss_base!=null && element.cvss_base!==''" style="font-weight: bold;">(CVSS: {{element.cvss_base}})</span>
+            <br>
+            <span *ngIf="element.name!=null && element.name!==''" style="font-weight: bold;">NVT: {{element.name}}</span>
+        </div>
+
+        <hr>
+        <div *ngIf="(element.product!=null && element.product!=='') || (element.detection_source_name!=null && element.detection_source_name!=='')">
+            <span style="font-weight: bold">Product detection result</span>
+            <br>
+            <span *ngIf="element.product!=null && element.product!==''">{{element.product}}</span>
+            <br>
+            <span *ngIf="element.detection_source_name!=null && element.detection_source_name!=='' && element.detection_oid !=null && element.detection_oid!==''">Detected by {{element.detection_source_name}} (OID: {{element.detection_oid}})</span>
+
+            <hr>
+        </div>
+
+        <div *ngIf="element.summary!=null && element.summary!==''" >
+            <span style="font-weight: bold">Summary</span>
+            <br>
+            <span >{{element.summary}}</span>
+            <hr>
+        </div>
+        <div *ngIf="element.description!=null && element.description!==''">
+            <span style="font-weight: bold">Vulnerability detection result:</span>
+            <br>
+            {{element.description}}
+            <!--
+            <span>Installed version: {{element.installed_version}}</span>
+            <br>
+            <span>Fixed version: {{element.fixed_version}}</span>
+            -->
+            <hr>
+        </div>
+        <div *ngIf="element.impact!=null && element.impact!==''">
+            <span style="font-weight: bold">Impact</span>
+            <br>
+            <span>{{element.impact}}</span>
+            <hr>
+        </div>
+        <div *ngIf="element.solution!=null && element.solution!==''">
+            <span style="font-weight: bold">Solution</span>
+            <br>
+            <span>{{element.solution}}</span>
+            <hr>
+        </div>
+        <div *ngIf="element.solutionType!=null && element.solutionType!==''">
+            <span style="font-weight: bold">Solution type</span>
+            <br>
+            <span>{{element.solutionType}}</span>
+            <hr>
+        </div>
+        <!--
+        <span style="font-weight: bold">Solution</span>
+        <br>
+        <span>Solution type: {{element.solutionType}}</span>
+        <br>
+        <span>{{element.solution}}</span>
+        <hr>
+        -->
+        <div *ngIf="element.affectedSoftware!=null && element.affectedSoftware!==''">
+            <span style="font-weight: bold">Affected software\OS</span>
+            <br>
+            <span>{{element.affectedSoftware}}</span>
+            <hr>
+        </div>
+
+        <div *ngIf="element.vulnerbailityInsight!=null && element.vulnerbailityInsight!==''">
+            <span style="font-weight: bold">Vulnerability insight</span>
+            <br>
+            <span>{{element.vulnerbailityInsight}}</span>
+            <hr>
+        </div>
+
+        <div *ngIf="(element.vulnerbailityDetectionMethod!=null && element.vulnerbailityDetectionMethod!=='') || (element.name!=null && element.name!=='') || (element.oid!=null && element.oid!=='') || (element.scan_nvt_version!=null && element.scan_nvt_version!=='')">
+
+            <span style="font-weight: bold">Vulnerability detection method: {{element.vulnerbailityDetectionMethod}}</span>
+            <br>
+            <span *ngIf="element.name!=null && element.name!==''">Details: {{element.name}}</span>
+            <br>
+            <span *ngIf="element.oid!=null && element.oid!==''">OID: {{element.oid}}</span>
+            <br>
+            <span *ngIf="element.scan_nvt_version!=null && element.scan_nvt_version!==''">Version used: {{element.scan_nvt_version}}</span>
+            <hr>
+        </div>
+
+        <div *ngIf="(element.product!=null && element.product!=='') || (element.method!=null && element.method!=='') || (element.detection_oid!=null && element.detection_oid!=='')">
+            <span style="font-weight: bold">Product detection result</span>
+            <br>
+            <span *ngIf="element.product!=null && element.product!==''">Product: {{element.product}}</span>
+            <br>
+            <span *ngIf="element.method!=null && element.method!==''">method: {{element.method}}</span>
+            <br>
+            <span *ngIf="element.detection_oid!=null && element.detection_oid!==''">OID: {{element.detection_oid}}</span>
+            <hr>
+        </div>
+
+        <div *ngIf="(element.cve!=null && element.cve!=='') || (element.bid!=null && element.bid!=='') || (element.refernces_others!=null && element.refernces_others!=='')">
+            <span style="font-weight: bold">References</span>
+            <br>
+            <span *ngIf="element.cve!=null && element.cve!==''">CVE: {{element.cve}}</span>
+            <br>
+            <span *ngIf="element.bid!=null && element.bid!==''">BID: {{element.bid}}</span>
+            <br>
+            <span *ngIf="element.refernces_others!=null && element.refernces_others!==''">Others: {{element.refernces_others}}</span>
+        </div>
+
+        <!--
+        <span style="font-weight: bold">Product detection result</span>
+        <br>
+        <span>Product: {{element.product}}</span>
+        <br>
+        <span>method: {{element.method}}</span>
+        <br>
+        <span>OID: {{element.detection_oid}}</span>
+        <hr>
+        -->
+        <!--
+        <span style="font-weight: bold">References</span>
+        <br>
+        <span>CVE: {{element.cve}}</span>
+        <br>
+        <span>BID: {{element.bid}}</span>
+        <br>
+        <span>Others: {{element.refernces_others}}</span>
+        -->
+    </div>
+    <div style="font-weight: bold; padding-bottom: 15px;">
+        <span style="    background: orange;color: white;">1.4.1 Medium vulnerabilities</span>
+    </div>
+    <div *ngFor="let element of targetReportDto.midiumResults" style="border:solid #8080801c;" class="center">
+        <div style="background-color:#eeeeee">
+            <span *ngIf="element.port!=null && element.port!==''" style="font-weight: bold;">Port: {{element.port}}</span>
+            <br>
+            <span *ngIf="element.threat!=null && element.threat !==''" style="font-weight: bold;">{{element.threat}}</span>
+            <span *ngIf="element.cvss_base!=null && element.cvss_base!==''" style="font-weight: bold;">(CVSS: {{element.cvss_base}})</span>
+            <br>
+            <span *ngIf="element.name!=null && element.name!==''" style="font-weight: bold;">NVT: {{element.name}}</span>
+        </div>
+
+        <hr>
+        <div *ngIf="(element.product!=null && element.product!=='') || (element.detection_source_name!=null && element.detection_source_name!=='')">
+            <span style="font-weight: bold">Product detection result</span>
+            <br>
+            <span *ngIf="element.product!=null && element.product!==''">{{element.product}}</span>
+            <br>
+            <span *ngIf="element.detection_source_name!=null && element.detection_source_name!=='' && element.detection_oid !=null && element.detection_oid!==''">Detected by {{element.detection_source_name}} (OID: {{element.detection_oid}})</span>
+
+            <hr>
+        </div>
+
+        <div *ngIf="element.summary!=null && element.summary!==''" >
+            <span style="font-weight: bold">Summary</span>
+            <br>
+            <span >{{element.summary}}</span>
+            <hr>
+        </div>
+        <div *ngIf="element.description!=null && element.description!==''">
+            <span style="font-weight: bold">Vulnerability detection result:</span>
+            <br>
+            {{element.description}}
+            <!--
+            <span>Installed version: {{element.installed_version}}</span>
+            <br>
+            <span>Fixed version: {{element.fixed_version}}</span>
+            -->
+            <hr>
+        </div>
+        <div *ngIf="element.impact!=null && element.impact!==''">
+            <span style="font-weight: bold">Impact</span>
+            <br>
+            <span>{{element.impact}}</span>
+            <hr>
+        </div>
+        <div *ngIf="element.solution!=null && element.solution!==''">
+            <span style="font-weight: bold">Solution</span>
+            <br>
+            <span>{{element.solution}}</span>
+            <hr>
+        </div>
+        <div *ngIf="element.solutionType!=null && element.solutionType!==''">
+            <span style="font-weight: bold">Solution type</span>
+            <br>
+            <span>{{element.solutionType}}</span>
+            <hr>
+        </div>
+        <!--
+        <span style="font-weight: bold">Solution</span>
+        <br>
+        <span>Solution type: {{element.solutionType}}</span>
+        <br>
+        <span>{{element.solution}}</span>
+        <hr>
+        -->
+        <div *ngIf="element.affectedSoftware!=null && element.affectedSoftware!==''">
+            <span style="font-weight: bold">Affected software\OS</span>
+            <br>
+            <span>{{element.affectedSoftware}}</span>
+            <hr>
+        </div>
+
+        <div *ngIf="element.vulnerbailityInsight!=null && element.vulnerbailityInsight!==''">
+            <span style="font-weight: bold">Vulnerability insight</span>
+            <br>
+            <span>{{element.vulnerbailityInsight}}</span>
+            <hr>
+        </div>
+
+        <div *ngIf="(element.vulnerbailityDetectionMethod!=null && element.vulnerbailityDetectionMethod!=='') || (element.name!=null && element.name!=='') || (element.oid!=null && element.oid!=='') || (element.scan_nvt_version!=null && element.scan_nvt_version!=='')">
+
+            <span style="font-weight: bold">Vulnerability detection method: {{element.vulnerbailityDetectionMethod}}</span>
+            <br>
+            <span *ngIf="element.name!=null && element.name!==''">Details: {{element.name}}</span>
+            <br>
+            <span *ngIf="element.oid!=null && element.oid!==''">OID: {{element.oid}}</span>
+            <br>
+            <span *ngIf="element.scan_nvt_version!=null && element.scan_nvt_version!==''">Version used: {{element.scan_nvt_version}}</span>
+            <hr>
+        </div>
+
+        <div *ngIf="(element.product!=null && element.product!=='') || (element.method!=null && element.method!=='') || (element.detection_oid!=null && element.detection_oid!=='')">
+            <span style="font-weight: bold">Product detection result</span>
+            <br>
+            <span *ngIf="element.product!=null && element.product!==''">Product: {{element.product}}</span>
+            <br>
+            <span *ngIf="element.method!=null && element.method!==''">method: {{element.method}}</span>
+            <br>
+            <span *ngIf="element.detection_oid!=null && element.detection_oid!==''">OID: {{element.detection_oid}}</span>
+            <hr>
+        </div>
+
+        <div *ngIf="(element.cve!=null && element.cve!=='') || (element.bid!=null && element.bid!=='') || (element.refernces_others!=null && element.refernces_others!=='')">
+            <span style="font-weight: bold">References</span>
+            <br>
+            <span *ngIf="element.cve!=null && element.cve!==''">CVE: {{element.cve}}</span>
+            <br>
+            <span *ngIf="element.bid!=null && element.bid!==''">BID: {{element.bid}}</span>
+            <br>
+            <span *ngIf="element.refernces_others!=null && element.refernces_others!==''">Others: {{element.refernces_others}}</span>
+        </div>
+
+        <!--
+        <span style="font-weight: bold">Product detection result</span>
+        <br>
+        <span>Product: {{element.product}}</span>
+        <br>
+        <span>method: {{element.method}}</span>
+        <br>
+        <span>OID: {{element.detection_oid}}</span>
+        <hr>
+        -->
+        <!--
+        <span style="font-weight: bold">References</span>
+        <br>
+        <span>CVE: {{element.cve}}</span>
+        <br>
+        <span>BID: {{element.bid}}</span>
+        <br>
+        <span>Others: {{element.refernces_others}}</span>
+        -->
+    </div>
+
+    <div style="font-weight: bold; padding-bottom: 15px;">
+        <span style="    background: yellow;color: white;">1.4.1 Low vulnerabilities</span>
+    </div>
+    <div *ngFor="let element of targetReportDto.lowResults" style="border:solid #8080801c;" class="center">
+        <div style="background-color:#eeeeee">
+            <span *ngIf="element.port!=null && element.port!==''" style="font-weight: bold;">Port: {{element.port}}</span>
+            <br>
+            <span *ngIf="element.threat!=null && element.threat !==''" style="font-weight: bold;">{{element.threat}}</span>
+            <span *ngIf="element.cvss_base!=null && element.cvss_base!==''" style="font-weight: bold;">(CVSS: {{element.cvss_base}})</span>
+            <br>
+            <span *ngIf="element.name!=null && element.name!==''" style="font-weight: bold;">NVT: {{element.name}}</span>
+        </div>
+
+        <hr>
+        <div *ngIf="(element.product!=null && element.product!=='') || (element.detection_source_name!=null && element.detection_source_name!=='')">
+            <span style="font-weight: bold">Product detection result</span>
+            <br>
+            <span *ngIf="element.product!=null && element.product!==''">{{element.product}}</span>
+            <br>
+            <span *ngIf="element.detection_source_name!=null && element.detection_source_name!=='' && element.detection_oid !=null && element.detection_oid!==''">Detected by {{element.detection_source_name}} (OID: {{element.detection_oid}})</span>
+
+            <hr>
+        </div>
+
+        <div *ngIf="element.summary!=null && element.summary!==''" >
+            <span style="font-weight: bold">Summary</span>
+            <br>
+            <span >{{element.summary}}</span>
+            <hr>
+        </div>
+        <div *ngIf="element.description!=null && element.description!==''">
+            <span style="font-weight: bold">Vulnerability detection result:</span>
+            <br>
+            {{element.description}}
+            <!--
+            <span>Installed version: {{element.installed_version}}</span>
+            <br>
+            <span>Fixed version: {{element.fixed_version}}</span>
+            -->
+            <hr>
+        </div>
+        <div *ngIf="element.impact!=null && element.impact!==''">
+            <span style="font-weight: bold">Impact</span>
+            <br>
+            <span>{{element.impact}}</span>
+            <hr>
+        </div>
+        <div *ngIf="element.solution!=null && element.solution!==''">
+            <span style="font-weight: bold">Solution</span>
+            <br>
+            <span>{{element.solution}}</span>
+            <hr>
+        </div>
+        <div *ngIf="element.solutionType!=null && element.solutionType!==''">
+            <span style="font-weight: bold">Solution type</span>
+            <br>
+            <span>{{element.solutionType}}</span>
+            <hr>
+        </div>
+        <!--
+        <span style="font-weight: bold">Solution</span>
+        <br>
+        <span>Solution type: {{element.solutionType}}</span>
+        <br>
+        <span>{{element.solution}}</span>
+        <hr>
+        -->
+        <div *ngIf="element.affectedSoftware!=null && element.affectedSoftware!==''">
+            <span style="font-weight: bold">Affected software\OS</span>
+            <br>
+            <span>{{element.affectedSoftware}}</span>
+            <hr>
+        </div>
+
+        <div *ngIf="element.vulnerbailityInsight!=null && element.vulnerbailityInsight!==''">
+            <span style="font-weight: bold">Vulnerability insight</span>
+            <br>
+            <span>{{element.vulnerbailityInsight}}</span>
+            <hr>
+        </div>
+
+        <div *ngIf="(element.vulnerbailityDetectionMethod!=null && element.vulnerbailityDetectionMethod!=='') || (element.name!=null && element.name!=='') || (element.oid!=null && element.oid!=='') || (element.scan_nvt_version!=null && element.scan_nvt_version!=='')">
+
+            <span style="font-weight: bold">Vulnerability detection method: {{element.vulnerbailityDetectionMethod}}</span>
+            <br>
+            <span *ngIf="element.name!=null && element.name!==''">Details: {{element.name}}</span>
+            <br>
+            <span *ngIf="element.oid!=null && element.oid!==''">OID: {{element.oid}}</span>
+            <br>
+            <span *ngIf="element.scan_nvt_version!=null && element.scan_nvt_version!==''">Version used: {{element.scan_nvt_version}}</span>
+            <hr>
+        </div>
+
+        <div *ngIf="(element.product!=null && element.product!=='') || (element.method!=null && element.method!=='') || (element.detection_oid!=null && element.detection_oid!=='')">
+            <span style="font-weight: bold">Product detection result</span>
+            <br>
+            <span *ngIf="element.product!=null && element.product!==''">Product: {{element.product}}</span>
+            <br>
+            <span *ngIf="element.method!=null && element.method!==''">method: {{element.method}}</span>
+            <br>
+            <span *ngIf="element.detection_oid!=null && element.detection_oid!==''">OID: {{element.detection_oid}}</span>
+            <hr>
+        </div>
+
+        <div *ngIf="(element.cve!=null && element.cve!=='') || (element.bid!=null && element.bid!=='') || (element.refernces_others!=null && element.refernces_others!=='')">
+            <span style="font-weight: bold">References</span>
+            <br>
+            <span *ngIf="element.cve!=null && element.cve!==''">CVE: {{element.cve}}</span>
+            <br>
+            <span *ngIf="element.bid!=null && element.bid!==''">BID: {{element.bid}}</span>
+            <br>
+            <span *ngIf="element.refernces_others!=null && element.refernces_others!==''">Others: {{element.refernces_others}}</span>
+        </div>
+
+        <!--
+        <span style="font-weight: bold">Product detection result</span>
+        <br>
+        <span>Product: {{element.product}}</span>
+        <br>
+        <span>method: {{element.method}}</span>
+        <br>
+        <span>OID: {{element.detection_oid}}</span>
+        <hr>
+        -->
+        <!--
+        <span style="font-weight: bold">References</span>
+        <br>
+        <span>CVE: {{element.cve}}</span>
+        <br>
+        <span>BID: {{element.bid}}</span>
+        <br>
+        <span>Others: {{element.refernces_others}}</span>
+        -->
+    </div>
+
+    <div>
+        <div class="title">
+            <span>{{number}}.5. Exploitation</span>
+        </div>
+        <div *ngIf="targetReportDto.sessions != null && targetReportDto.sessions.length !== 0">
+            <div *ngFor="let session of targetReportDto.sessions; let i = index;" >
+                <span > <b>Session ID: {{i}}</b></span>
+                <br>
+                <span >Name: {{session.name}}</span>
+                <br>
+                <span >Type: {{session.type}}</span>
+                <br>
+                <span >Info: {{session.info}}</span>
+                <br>
+                <span >Tunnel: {{session.tunnel}}</span>
+                <br>
+                <span >Via: {{session.via}}</span>
+                <br>
+                <span >Encrypted: {{session.encrypted}}</span>
+                <br>
+                <span >UUID: {{session.uuid}}</span>
+                <br>
+                <span >CheckIn: {{session.checkIn}}</span>
+                <br>
+                <span >Registered: {{session.registered}}</span>
+            </div>
+        </div>
+        <div>
+            <div *ngIf="targetReportDto.sessions == null || targetReportDto.sessions.length === 0">
+                No active sessions!
+            </div>
+        </div>
+
+    </div>
+</div>

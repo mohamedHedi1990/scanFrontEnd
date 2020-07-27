@@ -23,17 +23,18 @@ export class ListReportsComponent implements OnInit {
   }
 
   download(report) {
-    this.router.navigate(['report', report.name]);
+    this.router.navigate(['report', report.id]);
   }
 
-  getAllReports () {
+  getAllReports() {
     const context = this;
-    const url  = 'http://localhost:8090/api/report/all/' + this.targetName;
+    const url  = 'http://localhost:8090/api/target/report/all/' + this.targetName;
     this.axios.get(url)
         .then(function(response) {
           // handle success
-          context.reports = response;
+          context.reports = response.data;
           console.log('target list was successufully charged');
+          console.log('reports ', response.data);
 
         })
         .catch(function(error) {

@@ -1,43 +1,47 @@
 <div class="content">
   <div class="login-logo">
     <div>
-      <img class="brand-img" src="../../assets/images/auraxB.jpeg" alt="aurax" style="width: 100%; padding-top: 62%;">
-
+<img  src/>
     </div>
 
   </div>
-  <div class= "container" style="opacity: 0.9;">
+  <div class= "container" style="opacity: 0.9;margin-left: 40%;">
     <div class="page-content vertical-align-middle animation-slide-top animation-duration-1 content-center-login" style="padding-top: 25%;">
 
       <div class="text">
         <h5 class="font-size-18"><div>
-          <img class="brand-img" src="../../assets/images/aurax.png" alt="aurax" style="width: 20%;">
 
         </div></h5>
 
-        <h5 class="font-size-16" style="padding-top: 3%;padding-bottom: 2%;">Espace Employés</h5>
+        <h5 class="font-size-16" style="padding-top: 3%;padding-bottom: 2%;">Employee space</h5>
 
 
       </div>
 
-
+<div *ngIf="wrongLogin" style="color: red;">
+  <span style="color: red;">
+    Username or password is wrong. Thanks to verify your username and password.
+  </span>
+</div>
 
       <form action="" method="post">
 
         <div class="form-group">
-          <label class="sr-only" for="inputEmail">Nom d'utilisateur</label>
-          <input type="email" class="form-control" id="inputEmail" name="_username" placeholder="Nom d'utilisateur" [(ngModel)]="username">
+          <label class="sr-only" for="inputEmail">Username</label>
+          <input type="email" class="form-control" id="inputEmail" name="_username" placeholder="Username" [(ngModel)]="username">
         </div>
         <div class="form-group">
-          <label class="sr-only" for="inputPassword">Mot de passe</label>
-          <input type="password" class="form-control" id="inputPassword" name="_password" placeholder="Mot de passe" [(ngModel)]="password">
+          <label class="sr-only" for="inputPassword">Password</label>
+          <input type="password" class="form-control" id="inputPassword" name="_password" placeholder="Password" [(ngModel)]="password">
         </div>
-        <button type="submit" class="btn btn-primary btn-block" (click)="login()"><strong>Se connecter</strong></button>
+        <button type="submit" class="btn btn-primary btn-block" (click)="login()"><strong>Sign in</strong></button>
+
+        <!--
         <div style="display: flex">
 
-          <a class="float-right" href="/fr/resetting/request" style="padding-left: 72%; padding-top:7px;">Mot de passe oublié?</a>
+          <a class="float-right" href="/fr/resetting/request" style="padding-left: 66%; padding-top:7px;">Forget password?</a>
         </div>
-
+-->
       </form>
 
     </div>

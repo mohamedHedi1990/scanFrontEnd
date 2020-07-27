@@ -1,0 +1,20 @@
+<div>
+    <div>
+        <button class="btn btn-primary" (click)="cancelView()">Cancel</button>
+        <button class="btn btn-primary" (click)="getPDF()">Download report</button>
+    </div>
+    <div id="reportIdGlobal">
+        <div style="border: solid gray" >
+            <div>Global report: <b>{{globalReport.name}}</b></div>
+            <div>Creation date: <b>{{globalReport.creationDate}}</b></div>
+        </div>
+        <div *ngFor="let report of globalReport.reports; let i = index;">
+            <app-target-report-details [reportId]="report.id" [number]="i"></app-target-report-details>
+            <br>
+            <br>
+        </div>
+    </div>
+
+
+
+</div>

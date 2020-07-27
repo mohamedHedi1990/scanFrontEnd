@@ -11,25 +11,27 @@
 <div class="content">
   <div class="etudiant">
 
-    <ul class="nav navbar-toolbar navbar-center navbar-toolbar-center">
+    <ul class="nav navbar-toolbar navbar-center navbar-toolbar-center" style ="display: flex;">
       <li class="nav-item dropdown">
-        <a class="nav-link" style="color: white" href="#">Espace employé: <b>
+        <a class="nav-link" style="color: white">Employee space: <b>
           admin admin</b></a></li>
       <li class="nav-item dropdown">
         <a class="nav-link" style="width: 100%;margin-left: 160%; color:white">Date: <b>{{ currentDate | date: 'short'}}</b></a></li>
     </ul>
+
   </div>
   <div style="margin-left: 38%;">
+    <div style="width: 45px" (click)="deconnecter()">
+<a href="http://localhost:4200/">
+        <img src="../../assets/images/user.png" style="width: 100%; cursor: move; border-radius: 30px;background: white;" title="Déconnecter" (click)="deconnecter()">
+        <!--<img [src]=" sanitizer.bypassSecurityTrustResourceUrl(illustrationUrl )" style="width: 100%; cursor: move; border-radius: 30px;" title="Déconnecter" (click)="deconnecter()"> -->
+</a>
+    </div>
     <!--<i class="fas fa-bell icon"></i>
     <i class="fas fa-envelope icon"></i>
     <i class="fas fa-user-alt icon"></i> -->
   </div>
-  <div style="width: 45px">
-    <a>
-      <img src="../../assets/images/user.png" style="width: 100%; cursor: move; border-radius: 30px;" title="Déconnecter" (click)="deconnecter()">
-      <!--<img [src]=" sanitizer.bypassSecurityTrustResourceUrl(illustrationUrl )" style="width: 100%; cursor: move; border-radius: 30px;" title="Déconnecter" (click)="deconnecter()"> -->
-    </a>
-  </div>
+
 
 </div>
 </body>

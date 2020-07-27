@@ -1,0 +1,45 @@
+<div >
+    <div *ngIf="showMessage===true" class="alert-success">
+        <i class="fas fa-check"></i> <span>Your configuration was successuflly saved</span>
+    </div>
+    <form class="form-detail" [formGroup]="configuration" (ngSubmit)="onSubmit()" id="myform">
+        <div style="padding-left:15%;">
+            <div class="form-row">
+                <i class="fa fa-circle-o-notch" style="padding-top: 2px;padding-right: 5px;"></i>
+                <label style="padding-right: 54px;">Frequency *</label>
+                <select class="form-control" name="line" formControlName="occurrence" >
+                    <option value="DAILY">-- DAILY --</option>
+                    <option value="WEEKLY">-- WEEKLY --</option>
+                    <option value="MONTHLY">-- MONTHLY --</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <i class="fa fa-circle-o-notch" style="padding-top: 2px;padding-right: 5px;"></i>
+                <label style="padding-right: 54px;">Start date *</label>
+                <input type="date"  min="minDate" class="input-text" style="width: 500px; height:15%;" formControlName="beginDate" required >
+            </div>
+            <div class="form-row" style="padding-top: 2%;">
+                <i class="fa fa-circle-o-notch" style="padding-top: 2px;padding-right: 5px;"></i>
+                <label style="padding-right: 21px;" >Hour *</label>
+                <input type="number"  min="0" max = "23" class="input-text" style="width: 500px; height:15%;" formControlName="heure" required>
+            </div>
+            <div class="form-row" style="padding-top: 2%;">
+                <i class="fa fa-circle-o-notch" style="padding-top: 2px;padding-right: 5px;"></i>
+                <label style="padding-right: 21px;" >Minute *</label>
+                <input type="number"  min="0" max = "59" class="input-text" style="width: 500px; height:15%;" formControlName="minutes" required>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="form-row-last" style="padding-left:78.5%; padding-top: 1%;">
+            <!--<input type="submit" name="register" class="register" value="Envoyer" [disabled]="allInformationProvided==false" [ngClass]="{isDisabled: 'allInformationProvided==false'}">-->
+            <button type="submit" name="register" class="register" value="Envoyer"><i class="fas fa-save" style="padding-right: 5px;"></i> Save</button>
+        </div>
+
+
+    </form>
+
+</div>
